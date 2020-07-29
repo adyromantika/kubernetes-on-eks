@@ -1,0 +1,3 @@
+project_name = ""
+aws_region = ""
+acm_certificate_arn = ""
