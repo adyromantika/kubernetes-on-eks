@@ -1,6 +1,18 @@
 ---
+dist: bionic
+sudo: required
+
 services:
   - docker
 
+install:
+  - sudo apt-get -y update
+  - sudo apt-get -y install yamllint
+
 script:
-  - docker run -v `pwd`:/kubernetes-on-eks --rm --entrypoint "/kubernetes-on-eks/scripts/test-terraform.sh" hashicorp/terraform:light
+  - yamllint .
+  - >
+    docker run -v `pwd`:/kubernetes-on-eks
+    --rm
+    --entrypoint "/kubernetes-on-eks/scripts/test-terraform.sh"
+    hashicorp/terraform:light
