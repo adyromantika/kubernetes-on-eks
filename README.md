@@ -28,6 +28,19 @@ terraform plan
 terraform apply
 ```
 
+### Backend
+
+S3 bucket is used for the backend, and it needs to be changed in [main.tf](main.tf). Unfortunately variables are not allowed in the backend block in Terraform, so another way to do it is to pass backend information when running `terraform init` as shown below.
+
+```bash
+terraform init \
+  -backend-config="key=terraform.tfstate" \
+  -backend-config="bucket=<s3_bucket_name>" \
+  -backend-config="region=<aws_region>" \
+```
+
+In non-interactive mode or automation, it can be called from a script, to make the code reusable for other environments or regions.
+
 ## DNS Related
 
 ### Certificate
