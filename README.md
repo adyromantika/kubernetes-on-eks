@@ -1,4 +1,4 @@
-# Kubernetes on EKS
+# Kubernetes on EKS [![Build Status](https://travis-ci.org/adyromantika/kubernetes-on-eks.svg?branch=master)](https://travis-ci.org/adyromantika/kubernetes-on-eks)
 
 Launch a working Kubernetes cluster on Amazon EKS
 
