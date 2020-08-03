@@ -1,7 +1,7 @@
 # Allow inbound traffic from external IP addresses
 # cidr_blocks should be replaced by office IP or a list of allowed IPs/subnets for security
 resource "aws_security_group_rule" "eks-cluster-ingress-workstation-https" {
-  cidr_blocks       = ["0.0.0.0/32"]
+  cidr_blocks       = ["0.0.0.0/0"]
   description       = "Allow external machines to communicate with the cluster API Server"
   from_port         = 443
   protocol          = "tcp"
