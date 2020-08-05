@@ -28,7 +28,7 @@ terraform plan
 terraform apply
 ```
 
-### Backend
+### Terraform Backend
 
 S3 bucket is used for the backend, and it needs to be changed in [main.tf](main.tf). Unfortunately variables are not allowed in the backend block in Terraform, so another way to do it is to pass backend information when running `terraform init` as shown below.
 
@@ -45,7 +45,7 @@ In non-interactive mode or automation, it can be called from a script, to make t
 
 The default ALB provided is to handle requests for Kubernetes services with type `ClusterIP` where traffic is [via virtual IP](https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies).
 
-To launch external load balancers dedicated to a service, use `LoadBalancer`. For example:
+To launch an external load balancer dedicated to a service, use type `LoadBalancer`. For example:
 
 ```yaml
 apiVersion: v1
