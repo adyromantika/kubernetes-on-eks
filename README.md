@@ -43,7 +43,7 @@ In non-interactive mode or automation, it can be called from a script, to make t
 
 ### Load Balancing
 
-The default ALB provided is to handle requests for Kubernetes services with type `ClusterIP` where traffic is [via virtual IP](https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies). This is a popular implementation to save load balancer resource cost where traffic would be managed by the ingress controller.
+The default ALB provided is to handle requests for Kubernetes services with type `ClusterIP` where traffic is [via virtual IP](https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies). This popular implementation will ensure traffic is managed by the ingress controller instead of having more load balancers. Depending on the ingress controller software, appropriate annotations needs to be added to the ingress object.
 
 To launch an external load balancer dedicated to a service, use type `LoadBalancer`. For example:
 
