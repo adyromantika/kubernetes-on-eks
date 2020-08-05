@@ -41,6 +41,31 @@ terraform init \
 
 In non-interactive mode or automation, it can be called from a script, to make the code reusable for other environments or regions.
 
+### Load Balancing
+
+The default ALB provided is to handle requests for Kubernetes services with type `ClusterIP` where traffic is [via virtual IP](https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies).
+
+To launch external load balancers dedicated to a service, use `LoadBalancer`. For example:
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: example-service
+spec:
+  selector:
+    app: example
+  ports:
+    - port: 8765
+      targetPort: 9376
+  type: LoadBalancer
+```
+
+More reading about external load balancers:
+
+* [Create an External Load Balancer](https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/)
+* [EKS: Load balancing](https://docs.aws.amazon.com/eks/latest/userguide/load-balancing.html)
+
 ## DNS Related
 
 ### Certificate
