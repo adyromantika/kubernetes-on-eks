@@ -43,7 +43,7 @@ In non-interactive mode or automation, it can be called from a script, to make t
 
 ### Load Balancing
 
-The default ALB provided is to handle requests for Kubernetes services with type `ClusterIP` where traffic is [via virtual IP](https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies).
+The default ALB provided is to handle requests for Kubernetes services with type `ClusterIP` where traffic is [via virtual IP](https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies). This is a popular implementation to save load balancer resource cost where traffic would be managed by the ingress controller.
 
 To launch an external load balancer dedicated to a service, use type `LoadBalancer`. For example:
 
@@ -52,6 +52,9 @@ apiVersion: v1
 kind: Service
 metadata:
   name: example-service
+  annotations:
+     service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:xx-xxxx-x:xxxxxxxxx:xxxxxxx/xxxxx-xxxx-xxxx-xxxx-xxxxxxxxx
+     service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
 spec:
   selector:
     app: example
@@ -60,6 +63,8 @@ spec:
       targetPort: 9376
   type: LoadBalancer
 ```
+
+The `service.beta.kubernetes.io/aws-load-balancer-ssl-cert` annotation above is used to attach a certificate from ACM to the load balancer.
 
 More reading about external load balancers:
 
