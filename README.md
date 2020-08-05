@@ -78,7 +78,7 @@ It is possible to use ALB (with ingress), or NLB. More reading about external lo
 
 This repository **assumes external DNS is used** so no Route 53 resources are included.
 
-If Route 53 is used, we can create the certificate using `aws_acm_certificate` and validate it using `aws_acm_certificate_validation`.Example:
+If Route 53 is used, we can create the certificate using `aws_acm_certificate` and validate it using `aws_acm_certificate_validation`. Example:
 
 ```hcl
 resource "aws_acm_certificate" "certificate" {
@@ -120,6 +120,6 @@ To connect to the cluster initially as admin, we will need to populate `~/.kube/
 terraform output kubeconfig > ~/.kube/config
 ```
 
-## Security
+## Security Consideration
 
-In [sg_rules.tf](modules/eks/sg_rules.tf), the `cidr_blocks` for security group rule `aws_security_group_rule.eks-cluster-ingress-workstation-https` should be updated to a narrower set to allow only specific IP or range to avoid access attempts from the public.
+In [sg_rules.tf](modules/eks/sg_rules.tf#L4), the `cidr_blocks` for security group rule `aws_security_group_rule.eks-cluster-ingress-workstation-https` should be updated to a narrower set to allow only specific IP or range to avoid access attempts from the public.
