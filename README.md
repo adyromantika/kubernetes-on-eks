@@ -16,7 +16,7 @@ acm_certificate_arn = "arn:aws:acm:ap-southeast-1:XXXXXXXXXXXX:certificate/273a8
 
 * project_name - an identifier where the resources will be named and tagged with
 * aws_region - the region where the cluster will be launched
-* acm_certificate_arn - the ARN of the certificate in ACM to be attached to the load balancer. Preferably a wildcard certificate so that many subdomains can be served. More certificates can be added to the listener using `aws_lb_listener_certificate` in Terraform if needed later
+* acm_certificate_arn - the ARN of the certificate in ACM to be attached to the default load balancer. Preferably a wildcard certificate so that many subdomains can be served. More certificates can be added to the listener using `aws_lb_listener_certificate` in Terraform if needed in the future.
 
 Make sure awscli is configured using `aws configure`, or the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` are properly exported into the environment.
 
@@ -78,10 +78,6 @@ More reading about external load balancers:
 This repository assumes external DNS is used so no Route 53 resources are included. If Route 53 is used, we can create the certificate using `aws_acm_certificate` and validate it using `aws_acm_certificate_validation`.
 
 When external DNS is used, the validation record must be created manually and the ARN for the certificate will also need to be added as a variable.
-
-## SSL
-
-HTTPS is terminated in the load balancer level, so traefik is configured to listen spefically on a static port `32080` and deployed using the standard stable chart from the Helm repository.
 
 ### DNS Record
 
